@@ -8,7 +8,8 @@ public class WalkingDirectionsServiceAdapter implements UNCBuildingApi {
   private final UNCBuildingApi baseApi;
 
   public WalkingDirectionsServiceAdapter(
-          WalkingDirectionsService walkingService, UNCBuildingApi baseApi) {
+          WalkingDirectionsService walkingService,
+          UNCBuildingApi baseApi) {
     this.walkingService = walkingService;
     this.baseApi = baseApi;
   }
@@ -29,7 +30,6 @@ public class WalkingDirectionsServiceAdapter implements UNCBuildingApi {
     Building end = baseApi.getBuilding(endBuilding);
 
     if (start == null || end == null) {
-      System.out.println("One or both buildings are not in the UNCBuildingApi.");
       return;
     }
 

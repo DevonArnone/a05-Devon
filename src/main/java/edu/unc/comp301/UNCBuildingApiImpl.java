@@ -19,7 +19,11 @@ public class UNCBuildingApiImpl implements UNCBuildingApi {
 
   @Override
   public List<String> getAllBuildingNames() {
-    return new ArrayList<>(buildings.keySet());
+    List<String> names = new ArrayList<>();
+    for (Building building : buildings.values()) {
+      names.add(building.getName());
+    }
+    return names;
   }
 
   @Override
