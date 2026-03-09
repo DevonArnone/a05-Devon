@@ -34,4 +34,3 @@ public class UNCBuildingAPIImpl implements UNCBuildingAPI {
     buildings.put(name.toLowerCase(), new BuildingImpl(name, description));
   }
 }
-

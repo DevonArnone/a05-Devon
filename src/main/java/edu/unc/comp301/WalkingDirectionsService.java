@@ -76,8 +76,7 @@ public class WalkingDirectionsService {
     return new DirectionsResult(steps, totalDistance, totalDuration);
   }
 
-  public void getWalkingDirections(
-      double startLat, double startLon, double endLat, double endLon) {
+  public void getWalkingDirections(double startLat, double startLon, double endLat, double endLon) {
     try {
       String url = createURL(startLat, startLon, endLat, endLon);
       Request request = buildRequest(url);
@@ -104,4 +103,3 @@ public class WalkingDirectionsService {
     }
   }
 }
-

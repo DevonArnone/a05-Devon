@@ -60,4 +60,3 @@ public class NominatimGeocoder {
     return parseLocation(json);
   }
 }
-

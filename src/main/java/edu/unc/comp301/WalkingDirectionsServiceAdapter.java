@@ -40,4 +40,3 @@ public class WalkingDirectionsServiceAdapter implements UNCBuildingAPI {
     walkingService.getWalkingDirections(startLat, startLon, endLat, endLon);
   }
 }
-

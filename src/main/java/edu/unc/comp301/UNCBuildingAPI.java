@@ -10,4 +10,3 @@ public interface UNCBuildingAPI {
 
   void getDirections(String startBuilding, String endBuilding);
 }
-
