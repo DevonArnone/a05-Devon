@@ -6,5 +6,31 @@ import java.util.Properties;
 public class Main {
   public static void main(String[] args) {
 
+    Properties cfg = new Properties();
+    try (InputStream in = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
+      if (in == null) {
+        System.out.println("config.properties not found on classpath.");
+        return;
+      }
+      cfg.load(in);
+    } catch (Exception e) {
+      System.out.println(e);
+      return;
+    }
+
+    String apiKey = cfg.getProperty("ors.api.key");
+    if (apiKey == null || apiKey.isEmpty()) {
+      System.out.println("ors.api.key not found in config.properties.");
+      return;
+    }
+
+    UNCBuildingAPIImpl unc = new UNCBuildingAPIImpl();
+    unc.add("sitterson hall", "computer science");
+    unc.add("hamilton hall", "classrooms");
+
+    WalkingDirectionsService wds = new WalkingDirectionsService(apiKey);
+    UNCBuildingAPI adapter = new WalkingDirectionsServiceAdapter(unc, wds);
+
+    adapter.getDirections("sitterson hall", "hamilton hall");
   }
 }
