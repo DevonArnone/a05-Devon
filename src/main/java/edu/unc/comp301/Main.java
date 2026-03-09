@@ -24,12 +24,12 @@ public class Main {
       return;
     }
 
-    UNCBuildingAPIImpl unc = new UNCBuildingAPIImpl();
+    UNCBuildingApiImpl unc = new UNCBuildingApiImpl();
     unc.add("sitterson hall", "computer science");
     unc.add("hamilton hall", "classrooms");
 
     WalkingDirectionsService wds = new WalkingDirectionsService(apiKey);
-    UNCBuildingAPI adapter = new WalkingDirectionsServiceAdapter(unc, wds);
+    UNCBuildingApi adapter = new WalkingDirectionsServiceAdapter(unc, wds);
 
     adapter.getDirections("sitterson hall", "hamilton hall");
   }

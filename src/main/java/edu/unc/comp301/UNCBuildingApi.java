@@ -2,7 +2,7 @@ package edu.unc.comp301;
 
 import java.util.List;
 
-public interface UNCBuildingAPI {
+public interface UNCBuildingApi {
 
   Building getBuilding(String name);
 

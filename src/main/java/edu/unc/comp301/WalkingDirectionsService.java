@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 public class WalkingDirectionsService {
 
-  private final String baseURL = "https://api.openrouteservice.org/v2/directions/foot-walking";
   private final String apiKey;
   private final OkHttpClient client = new OkHttpClient();
 
@@ -23,14 +22,16 @@ public class WalkingDirectionsService {
   public String createURL(double startLat, double startLon, double endLat, double endLon) {
     String start = startLon + "," + startLat;
     String end = endLon + "," + endLat;
+
     HttpUrl url =
-        HttpUrl.parse(baseURL)
-            .newBuilder()
-            .addQueryParameter("api_key", apiKey)
-            .addQueryParameter("start", start)
-            .addQueryParameter("end", end)
-            .addQueryParameter("steps", "true")
-            .build();
+            HttpUrl.parse("https://api.openrouteservice.org/v2/directions/foot-walking")
+                    .newBuilder()
+                    .addQueryParameter("api_key", apiKey)
+                    .addQueryParameter("start", start)
+                    .addQueryParameter("end", end)
+                    .addQueryParameter("steps", "true")
+                    .build();
+
     return url.toString();
   }
 
@@ -60,12 +61,14 @@ public class WalkingDirectionsService {
 
     for (int i = 0; i < segments.length(); i++) {
       JSONObject segment = segments.getJSONObject(i);
-      JSONArray segSteps = segment.getJSONArray("steps");
-      for (int j = 0; j < segSteps.length(); j++) {
-        JSONObject step = segSteps.getJSONObject(j);
-        String instruction = step.getString("instruction");
-        double distance = step.getDouble("distance");
-        double duration = step.getDouble("duration");
+      JSONArray segmentSteps = segment.getJSONArray("steps");
+
+      for (int j = 0; j < segmentSteps.length(); j++) {
+        JSONObject stepObj = segmentSteps.getJSONObject(j);
+
+        String instruction = stepObj.getString("instruction");
+        double distance = stepObj.getDouble("distance");
+        double duration = stepObj.getDouble("duration");
 
         steps.add(new Step(instruction, distance, duration));
         totalDistance += distance;
@@ -76,7 +79,8 @@ public class WalkingDirectionsService {
     return new DirectionsResult(steps, totalDistance, totalDuration);
   }
 
-  public void getWalkingDirections(double startLat, double startLon, double endLat, double endLon) {
+  public void getWalkingDirections(
+          double startLat, double startLon, double endLat, double endLon) {
     try {
       String url = createURL(startLat, startLon, endLat, endLon);
       Request request = buildRequest(url);
@@ -87,15 +91,16 @@ public class WalkingDirectionsService {
       for (int i = 0; i < steps.size(); i++) {
         Step step = steps.get(i);
         System.out.println(
-            (i + 1)
-                + ". "
-                + step.getInstruction()
-                + " - ("
-                + step.getDistance()
-                + " meters, "
-                + step.getDuration()
-                + " seconds)");
+                (i + 1)
+                        + ". "
+                        + step.getInstruction()
+                        + " - ("
+                        + step.getDistance()
+                        + " meters, "
+                        + step.getDuration()
+                        + " seconds)");
       }
+
       System.out.println("Total distance: " + result.getTotalDistance() + " m");
       System.out.println("Total time: " + result.getTotalDuration());
     } catch (Exception e) {

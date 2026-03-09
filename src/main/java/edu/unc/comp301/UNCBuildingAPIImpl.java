@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UNCBuildingAPIImpl implements UNCBuildingAPI {
+public class UNCBuildingApiImpl implements UNCBuildingApi {
 
   private final Map<String, Building> buildings = new HashMap<>();
 
@@ -24,7 +24,6 @@ public class UNCBuildingAPIImpl implements UNCBuildingAPI {
 
   @Override
   public void getDirections(String startBuilding, String endBuilding) {
-    // Intentionally left blank per assignment instructions.
   }
 
   public void add(String name, String description) {

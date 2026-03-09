@@ -2,13 +2,13 @@ package edu.unc.comp301;
 
 import java.util.List;
 
-public class WalkingDirectionsServiceAdapter implements UNCBuildingAPI {
+public class WalkingDirectionsServiceAdapter implements UNCBuildingApi {
 
-  private final UNCBuildingAPIImpl baseApi;
+  private final UNCBuildingApiImpl baseApi;
   private final WalkingDirectionsService walkingService;
 
   public WalkingDirectionsServiceAdapter(
-      UNCBuildingAPIImpl baseApi, WalkingDirectionsService walkingService) {
+      UNCBuildingApiImpl baseApi, WalkingDirectionsService walkingService) {
     this.baseApi = baseApi;
     this.walkingService = walkingService;
   }
