@@ -29,7 +29,7 @@ public class Main {
     unc.add("hamilton hall", "classrooms");
 
     WalkingDirectionsService wds = new WalkingDirectionsService(apiKey);
-    UNCBuildingApi adapter = new WalkingDirectionsServiceAdapter(unc, wds);
+    UNCBuildingApi adapter = new WalkingDirectionsServiceAdapter(wds, unc);
 
     adapter.getDirections("sitterson hall", "hamilton hall");
   }

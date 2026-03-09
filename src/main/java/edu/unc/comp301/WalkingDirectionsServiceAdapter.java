@@ -4,13 +4,13 @@ import java.util.List;
 
 public class WalkingDirectionsServiceAdapter implements UNCBuildingApi {
 
-  private final UNCBuildingApiImpl baseApi;
   private final WalkingDirectionsService walkingService;
+  private final UNCBuildingApi baseApi;
 
   public WalkingDirectionsServiceAdapter(
-      UNCBuildingApiImpl baseApi, WalkingDirectionsService walkingService) {
-    this.baseApi = baseApi;
+          WalkingDirectionsService walkingService, UNCBuildingApi baseApi) {
     this.walkingService = walkingService;
+    this.baseApi = baseApi;
   }
 
   @Override
@@ -27,16 +27,16 @@ public class WalkingDirectionsServiceAdapter implements UNCBuildingApi {
   public void getDirections(String startBuilding, String endBuilding) {
     Building start = baseApi.getBuilding(startBuilding);
     Building end = baseApi.getBuilding(endBuilding);
+
     if (start == null || end == null) {
-      System.out.println("One or both buildings are not in the UNCBuildingAPI.");
+      System.out.println("One or both buildings are not in the UNCBuildingApi.");
       return;
     }
 
-    double startLat = start.getLatitude();
-    double startLon = start.getLongitude();
-    double endLat = end.getLatitude();
-    double endLon = end.getLongitude();
-
-    walkingService.getWalkingDirections(startLat, startLon, endLat, endLon);
+    walkingService.getWalkingDirections(
+            start.getLatitude(),
+            start.getLongitude(),
+            end.getLatitude(),
+            end.getLongitude());
   }
 }
